@@ -9,7 +9,7 @@
     
     function WeatherService($http) {
 
-        var getFiveDayForecast = function(zipCode, country) {
+        var getFiveDayForecastByZipCode = function(zipCode, country) {
             return $http({
                 method : 'GET',
                 url : 'http://api.openweathermap.org/data/2.5/forecast',
@@ -18,11 +18,25 @@
                     units : 'imperial',
                     appid : 'c25086bc159b5768f6257df72935bef0'
                 }
-            })
+            });
+        };
+
+        var getFiveDayForecastByGeoLocation = function(lat, long) {
+            return $http({
+                method : 'GET',
+                url : 'http://api.openweathermap.org/data/2.5/forecast',
+                params : {
+                    lat: lat,
+                    lon: long,
+                    units : 'imperial',
+                    appid : 'c25086bc159b5768f6257df72935bef0'
+                }
+            });
         };
 
         return {
-            getFiveDayForecast : getFiveDayForecast
+            getFiveDayForecastByZipCode : getFiveDayForecastByZipCode,
+            getFiveDayForecastByGeoLocation : getFiveDayForecastByGeoLocation
         };
 
         }

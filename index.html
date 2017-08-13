@@ -15,11 +15,17 @@
 <body ng-app="WeatherApp" ng-controller="WeatherController">
     <div class="container">
       <h1>Five Day Forecast</h1>
+      <h2>for {{ city.name }}, {{ city.country }}</h2>
       <table class="table">
         <tbody class="table-body">
           <tr class="table-row" ng-repeat="(day, forecast) in forecasts">
             <td class="table-cell">{{ day }}</td>
-            <td ng-repeat="cast in forecast track by $index">{{ cast.main.temp }}</td>
+            <td class="weather-cell" ng-repeat="cast in forecast track by $index">
+              <p><strong>{{ displayDate(cast.dt) }}</strong></p>
+              <p>{{ cast.main.temp }}&#176;F</p>
+              <p>{{ cast.weather[0].description }}</p>
+              <img ng-src="{{ getIconUrl(cast) }}" />
+            </td>
           </tr>
         </tbody>
       </table>

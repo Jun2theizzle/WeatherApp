@@ -7,15 +7,43 @@
     WeatherController.$inject = ['$scope', 'WeatherService'];
     
     function WeatherController($scope, WeatherService) {
-        $scope.forecasts;
+        $scope.forecasts,
+        $scope.city,
+
+        $scope.zipCode = '60661';
+        $scope.countryCode = 'us';
+        $scope.displayDate = function(date) {
+            return moment.unix(date).format('hh:mm a');
+        }
+
+        $scope.getIconUrl = function(forecast) {
+            var iconCode = forecast.weather[0].icon;
+            return "http://openweathermap.org/img/w/" + iconCode + ".png";
+        }
+
         // function to run when page loads
         function startUp() {
-            WeatherService.getFiveDayForecast('60601', 'us')
-                .then(function(response) { 
-                    $scope.forecasts = groupWeatherByDay(response.data.list);
-                }, function(error){
-                    console.log(error);
+            navigator.geolocation.getCurrentPosition(
+                function(geoResponse) {
+                    WeatherService
+                        .getFiveDayForecastByGeoLocation(geoResponse.coords.latitude, geoResponse.coords.longitude)
+                        .then(loadTableData, defaultErrorHandler);
+                },
+                function(geoError) {
+                    console.log('Using default location');
+                    WeatherService
+                        .getFiveDayForecastByZipCode($scope.zipCode, $scope.countryCode)
+                        .then(loadTableData, defaultErrorHandler);
                 });
+        }
+
+        function loadTableData(response) {
+            $scope.forecasts = groupWeatherByDay(response.data.list);
+            $scope.city = response.data.city;
+        }
+
+        function defaultErrorHandler(error) {
+            console.log(error);
         }
 
         function groupWeatherByDay(forecasts) {

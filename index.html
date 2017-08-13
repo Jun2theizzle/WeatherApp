@@ -14,12 +14,12 @@
 
 <body ng-app="WeatherApp" ng-controller="WeatherController">
     <div class="container">
+      <h1>Five Day Forecast</h1>
       <table class="table">
-        <thead class="table-header">
-        </thead>
         <tbody class="table-body">
-          <tr class="table-row">
-            <td class="table-cell"></td>
+          <tr class="table-row" ng-repeat="(day, forecast) in forecasts">
+            <td class="table-cell">{{ day }}</td>
+            <td ng-repeat="cast in forecast track by $index">{{ cast.main.temp }}</td>
           </tr>
         </tbody>
       </table>
@@ -28,6 +28,7 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>   
     <script src="js/weatherModule.js"></script>
     <script src="js/app.js"></script>

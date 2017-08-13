@@ -7,8 +7,19 @@
     WeatherController.$inject = ['$scope', 'WeatherService'];
     
     function WeatherController($scope, WeatherService) {
-        $scope.click = function() {
-            WeatherService.getFiveDayForecast();
+
+        // function to run when page loads
+        function startUp() {
+            WeatherService.getFiveDayForecast('60601', 'us')
+                .then(function(response) { 
+                    console.log(response.data);
+                }, function(error){
+                    console.log(error);
+                });
         }
+
+        function groupBy
+
+        startUp();
     }
 })();

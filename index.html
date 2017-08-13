@@ -6,7 +6,7 @@
 
   <title>Weather App</title>
   <meta name="description" content="RocketMile Weather App">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="style/site.css">
 
 
@@ -14,12 +14,21 @@
 
 <body ng-app="WeatherApp" ng-controller="WeatherController">
     <div class="container">
-      <button ng-click="click()">Click</button>
+      <table class="table">
+        <thead class="table-header">
+        </thead>
+        <tbody class="table-body">
+          <tr class="table-row">
+            <td class="table-cell"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>   
     <script src="js/weatherModule.js"></script>
     <script src="js/app.js"></script>
 </body>

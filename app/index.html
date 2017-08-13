@@ -13,7 +13,8 @@
 </head>
 
 <body ng-app="WeatherApp" ng-controller="WeatherController">
-    <div class="container">
+    <div id="spinner" ng-show="downloadingWeatherData"></div>    
+    <div id="weatherAppContainer" class="container" ng-show="!downloadingWeatherData">
       <h1>Five Day Forecast</h1>
       <h2>for {{ city.name }}, {{ city.country }}</h2>
       <table class="table">
@@ -32,7 +33,7 @@
     </div>
 
 
-
+    <script src="http://spin.js.org/spin.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>   

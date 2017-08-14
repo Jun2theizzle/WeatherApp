@@ -3,7 +3,7 @@
 
     angular
         .module('WeatherModule', [])
-        .factory('WeatherService', WeatherService);
+        .service('WeatherService', WeatherService);
 
     WeatherService.$inject = ['$http'];
     

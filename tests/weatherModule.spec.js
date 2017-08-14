@@ -1,17 +1,17 @@
 describe('weatherModule', function(){
-    var weatherService;
+    var WeatherService;
     beforeEach(angular.mock.module('WeatherModule'));
 
-    beforeEach(inject(function(_weatherService_) {
-        weatherService = _weatherService_;
+    beforeEach(inject(function(_WeatherService_) {
+        WeatherService = _WeatherService_;
     }));
 
     it('should exist', function() {
-        expect(weatherService).toBeDefined();
+        expect(WeatherService).toBeDefined();
     });
-    
+
     it('getFiveDayForecastByZipCode should exists', function() {
-        expect(weatherService.getFiveDayForecastByZipCode).toBeDefined();
-    })
+        expect(WeatherService.getFiveDayForecastByZipCode).toBeDefined();
+    });
 
 });

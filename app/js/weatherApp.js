@@ -4,27 +4,29 @@
     angular.module('WeatherApp', ['WeatherModule'])
         .controller('WeatherController', WeatherController);
 
-    WeatherController.$inject = ['$scope', 'WeatherService'];
+    WeatherController.$inject = ['WeatherService'];
     
-    function WeatherController($scope, WeatherService) {
+    function WeatherController(WeatherService) {
+        var vm = this;
+        vm.blah = 'adfssaf';
         // define scope variables
-        $scope.zipCode = '60661',
-        $scope.countryCode = 'us',
-        $scope.downloadingWeatherData = true,
-        $scope.forecasts,
-        $scope.city;
+        vm.zipCode = '60661',
+        vm.countryCode = 'us',
+        vm.downloadingWeatherData = true,
+        vm.forecasts,
+        vm.city;
 
-        $scope.displayDate = function(date) {
+        vm.displayDate = function(date) {
             return moment.unix(date).format('hh:mm a');
         }
 
-        $scope.getIconUrl = function(forecast) {
+        vm.getIconUrl = function(forecast) {
             var iconCode = forecast.weather[0].icon;
             return "http://openweathermap.org/img/w/" + iconCode + ".png";
         }
 
         // function to run when page loads
-        $scope.startUp = function() {
+        vm.startUp = function() {
             var opts = {
                 lines: 13,
                 length: 28,
@@ -59,15 +61,15 @@
                 function(geoError) {
                     console.log('Using default location');
                     WeatherService
-                        .getFiveDayForecastByZipCode($scope.zipCode, $scope.countryCode)
+                        .getFiveDayForecastByZipCode(vm.zipCode, vm.countryCode)
                         .then(loadTableData, defaultErrorHandler);
                 });
         }
 
         function loadTableData(response) {
-            $scope.forecasts = groupWeatherByDay(response.data.list);
-            $scope.city = response.data.city;
-            $scope.downloadingWeatherData = false;
+            vm.forecasts = groupWeatherByDay(response.data.list);
+            vm.city = response.data.city;
+            vm.downloadingWeatherData = false;
         }
 
         function defaultErrorHandler(error) {

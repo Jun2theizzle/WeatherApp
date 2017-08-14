@@ -1,4 +1,4 @@
-describe('weatherModule', function(){
+describe('WeatherModule', function(){
     var WeatherService;
     
     // Load the WeatherModule

@@ -24,7 +24,7 @@
         }
 
         // function to run when page loads
-        function startUp() {
+        $scope.startUp = function() {
             var opts = {
                 lines: 13,
                 length: 28,

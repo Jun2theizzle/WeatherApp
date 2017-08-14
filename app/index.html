@@ -12,7 +12,7 @@
 
 </head>
 
-<body ng-app="WeatherApp" ng-controller="WeatherController">
+<body ng-app="WeatherApp" ng-controller="WeatherController" ng-init="startUp()">
     <div id="spinner" ng-show="downloadingWeatherData"></div>    
     <div id="weatherAppContainer" class="container" ng-show="!downloadingWeatherData">
       <h1>Five Day Forecast</h1>

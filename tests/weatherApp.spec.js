@@ -1,5 +1,5 @@
 describe('WeatherApp', function() {
-    var WeatherService, $controller, WeatherController, scope, httpBackend;
+    var WeatherService, $controller, WeatherController, httpBackend;
 
     beforeEach(angular.mock.module('ui.router'));
 
@@ -7,13 +7,12 @@ describe('WeatherApp', function() {
     beforeEach(angular.mock.module('WeatherModule'));
     beforeEach(angular.mock.module('WeatherApp'));
 
-    beforeEach(inject(function($rootScope, _WeatherService_, _$controller_, $httpBackend) {
-        scope           = $rootScope.$new(),
+    beforeEach(inject(function(_WeatherService_, _$controller_, $httpBackend) {
         $controller     = _$controller_,
         WeatherService  = _WeatherService_,
         httpBackend     = $httpBackend;
 
-        WeatherController = $controller('WeatherController', { $scope : scope, WeatherService : WeatherService });
+        WeatherController = $controller('WeatherController', { WeatherService : WeatherService });
     }));
 
     it('controller should be defined', function() {
@@ -27,6 +26,7 @@ describe('WeatherApp', function() {
             }]
         };
 
-        
+        var iconUrl = WeatherController.getIconUrl(forecast);
+        expect(iconUrl).toEqual('http://openweathermap.org/img/w/test.png')
     });
 });

@@ -8,8 +8,7 @@
     
     function WeatherController(WeatherService) {
         var vm = this;
-        vm.blah = 'adfssaf';
-        // define scope variables
+        // define vm variables
         vm.zipCode = '60661',
         vm.countryCode = 'us',
         vm.downloadingWeatherData = true,
@@ -22,7 +21,7 @@
 
         vm.getIconUrl = function(forecast) {
             var iconCode = forecast.weather[0].icon;
-            return "http://openweathermap.org/img/w/" + iconCode + ".png";
+            return `http://openweathermap.org/img/w/${iconCode}.png`;
         }
 
         // function to run when page loads

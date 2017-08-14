@@ -11,6 +11,7 @@ describe('WeatherApp', function() {
         $controller     = _$controller_,
         WeatherService  = _WeatherService_,
         httpBackend     = $httpBackend;
+        // example
         httpBackend.when('GET', 'http://api.openweathermap.org/data/2.5/forecast?appid=c25086bc159b5768f6257df72935bef0&lat=1&lon=1&units=imperial').respond(200,'herro');
         WeatherController = $controller('WeatherController', { WeatherService : WeatherService });
     }));
@@ -30,10 +31,20 @@ describe('WeatherApp', function() {
         expect(iconUrl).toEqual('http://openweathermap.org/img/w/test.png')
     });
 
-    it('testing http backend', function() {
-    WeatherController.testMethod();
-                httpBackend.flush();
-
-        expect(WeatherController.tester).toEqual('herro');
+    it('testing geolocation', function() {
+          spyOn(navigator.geolocation,"getCurrentPosition").and.callFake(function() {
+            var position = { coords: { latitude: 111111, longitude: -96 } };
+            arguments[0](position);
     });
+        WeatherController.test();
+        expect(WeatherController.city).toEqual(111111);
+    })
+
+    // example
+    // it('testing http backend', function() {
+    // WeatherController.testMethod();
+    //             httpBackend.flush();
+
+    //     expect(WeatherController.tester).toEqual('herro');
+    // });
 });

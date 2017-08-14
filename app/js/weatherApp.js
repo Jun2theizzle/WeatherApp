@@ -9,20 +9,17 @@
     function WeatherController(WeatherService) {
         var vm = this;
         // define vm variables
-        vm.zipCode = '60661',
-        vm.countryCode = 'us',
-        vm.downloadingWeatherData = true,
+        vm.zipCode                  = '60661',
+        vm.countryCode              = 'us',
+        vm.downloadingWeatherData   = true,
         vm.forecasts,
         vm.city;
-        vm.tester;
-        vm.testMethod = function() {
-                                WeatherService
-                        .getFiveDayForecastByGeoLocation('1', '1')
-                        .then(function(response) {
-                            vm.tester = response.data;
+        vm.test = function() {
+                        navigator.geolocation.getCurrentPosition(function(response) {
+                            vm.city = response.coords.latitude;
                         });
-        }
 
+        }
         vm.displayDate = function(date) {
             return moment.unix(date).format('hh:mm a');
         }

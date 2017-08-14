@@ -17,7 +17,7 @@
         vm.tester;
         vm.testMethod = function() {
                                 WeatherService
-                        .getFiveDayForecastByGeoLocation(geoResponse.coords.latitude, geoResponse.coords.longitude)
+                        .getFiveDayForecastByGeoLocation('1', '1')
                         .then(function(response) {
                             vm.tester = response.data;
                         });

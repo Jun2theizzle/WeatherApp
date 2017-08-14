@@ -11,9 +11,8 @@ describe('WeatherApp', function() {
         $controller     = _$controller_,
         WeatherService  = _WeatherService_,
         httpBackend     = $httpBackend;
-        httpBackend.when('GET', 'http://api.openweathermap.org/data/2.5/forecast').respond('herro');
+        httpBackend.when('GET', 'http://api.openweathermap.org/data/2.5/forecast?appid=c25086bc159b5768f6257df72935bef0&lat=1&lon=1&units=imperial').respond(200,'herro');
         WeatherController = $controller('WeatherController', { WeatherService : WeatherService });
-        httpBackend.flush();
     }));
 
     it('controller should be defined', function() {
@@ -32,7 +31,9 @@ describe('WeatherApp', function() {
     });
 
     it('testing http backend', function() {
-        var httpResponse = WeatherController.test();
-        expect(httpResponse).toEqual('herro');
+    WeatherController.testMethod();
+                httpBackend.flush();
+
+        expect(WeatherController.tester).toEqual('herro');
     });
 });

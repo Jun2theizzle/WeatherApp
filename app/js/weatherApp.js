@@ -14,6 +14,14 @@
         vm.downloadingWeatherData = true,
         vm.forecasts,
         vm.city;
+        vm.tester;
+        vm.testMethod = function() {
+                                WeatherService
+                        .getFiveDayForecastByGeoLocation(geoResponse.coords.latitude, geoResponse.coords.longitude)
+                        .then(function(response) {
+                            vm.tester = response.data;
+                        });
+        }
 
         vm.displayDate = function(date) {
             return moment.unix(date).format('hh:mm a');

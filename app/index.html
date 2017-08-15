@@ -13,6 +13,8 @@
 </head>
 
 <body ng-app="WeatherApp" ng-controller="WeatherController as wCtrl" ng-init="wCtrl.startUp()">
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
+    <div id="map"></div>
     <div id="spinner" ng-show="wCtrl.downloadingWeatherData"></div>
     <div id="weatherAppContainer" class="container" ng-show="!wCtrl.downloadingWeatherData">
       <h1>Five Day Forecast</h1>
@@ -32,7 +34,9 @@
       </table>
     </div>
 
-
+   
+    <!-- Replace the value of the key parameter with your own API key. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWjDiEoUcOI31Y45rw3GGcnZrww7deRIE&libraries=places" async defer></script>
     <script src="http://spin.js.org/spin.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>

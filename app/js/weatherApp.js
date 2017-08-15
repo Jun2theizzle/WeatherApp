@@ -14,12 +14,7 @@
         vm.downloadingWeatherData   = true,
         vm.forecasts,
         vm.city;
-        vm.test = function() {
-                        navigator.geolocation.getCurrentPosition(function(response) {
-                            vm.city = response.coords.latitude;
-                        });
 
-        }
         vm.displayDate = function(date) {
             return moment.unix(date).format('hh:mm a');
         }

@@ -9,7 +9,7 @@ describe('GoogleMapsModule', function(){
         GoogleMapsService = _GoogleMapsService_;
     }));
 
-    // These test are simple 'defined' tests as the module does 0 logic and only make http requests
+    // These test are simple 'defined' tests as the the underlying code is using as existing example
     it('GoogleMapsService should exist', function() {
         expect(GoogleMapsService).toBeDefined();
     });

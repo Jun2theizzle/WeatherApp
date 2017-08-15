@@ -9,7 +9,7 @@ describe('SpinnerModule', function(){
         SpinnerService = _SpinnerService_;
     }));
 
-    // These test are simple 'defined' tests as the module does 0 logic and only make http requests
+    // These test are simple 'defined' tests as the module does 0 logic but make Spinner calls
     it('SpinnerService should exist', function() {
         expect(SpinnerService).toBeDefined();
     });

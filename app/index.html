@@ -13,10 +13,10 @@
 </head>
 
 <body ng-app="WeatherApp" ng-controller="WeatherController as wCtrl" ng-init="wCtrl.startUp()">
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
-    <div id="map"></div>
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
+        <div id="map"></div>
     <div id="spinner" ng-show="wCtrl.downloadingWeatherData"></div>
-    <div id="weatherAppContainer" class="container" ng-show="!wCtrl.downloadingWeatherData">
+    <div id="weatherAppContainer" class="container" ng-show="!wCtrl.downloadingWeatherData">    
       <h1>Five Day Forecast</h1>
       <h2>for {{ wCtrl.city.name }}, {{ wCtrl.city.country }}</h2>
       <table class="table">

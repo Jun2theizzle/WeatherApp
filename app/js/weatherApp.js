@@ -7,7 +7,7 @@
     WeatherController.$inject = ['WeatherService'];
     
     function WeatherController(WeatherService) {
-        var vm = this;
+        var vm                      = this;
         // define vm variables
         vm.zipCode                  = '60661',
         vm.countryCode              = 'us',
@@ -60,35 +60,70 @@
                 function(geoResponse) {
                     WeatherService
                         .getFiveDayForecastByGeoLocation(geoResponse.coords.latitude, geoResponse.coords.longitude)
-                        .then(loadTableData, defaultErrorHandler);
+                        .then(loadForecast, defaultErrorHandler);
                 },
                 function(geoError) {
                     console.log('Using default location');
                     WeatherService
                         .getFiveDayForecastByZipCode(vm.zipCode, vm.countryCode)
-                        .then(loadTableData, defaultErrorHandler);
+                        .then(loadForecast, defaultErrorHandler);
                 });
                 
         }
 
-        function loadTableData(response) {
+        function loadForecast(response) {
             vm.forecasts = groupWeatherByDay(response.data.list);
             vm.city = response.data.city;
             vm.downloadingWeatherData = false;
-            initGoogleMaps();            
+            initGoogleMaps(response.data.city.coord);            
+        }
+
+        function updateForecast(coords) {
+            vm.downloadingWeatherData = true;            
+            WeatherService
+                .getFiveDayForecastByGeoLocation(coords.lat(), coords.lng())
+                .then(function(response) {
+                    vm.forecasts = groupWeatherByDay(response.data.list);
+                    vm.city = response.data.city;
+                    vm.downloadingWeatherData = false;
+                    console.log(response.data)
+                }, defaultErrorHandler);
         }
 
         function defaultErrorHandler(error) {
             console.log(error);
         }
 
-        function initGoogleMaps() {
+        function initGoogleMarker(map, googleCoords) {
+            var icon = {
+                url: 'http://maps.google.com/mapfiles/ms/icons/blue.png',
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+              };
+
+            new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: 'RocketMiles',
+                position: googleCoords
+            })
+        }
+        
+        function initGoogleMaps(coords) {
+            var googleCoords = {
+                lat: coords.lat,
+                lng: coords.lon
+            };
 
             var map = new google.maps.Map(document.getElementById('map'), {
-              center: {lat: -33.8688, lng: 151.2195},
+              center: googleCoords,
               zoom: 13,
               mapTypeId: 'roadmap'
             });
+
+            initGoogleMarker(map, googleCoords);
           
             // Create the search box and link it to the UI element.
             var input = document.getElementById('pac-input');
@@ -147,8 +182,10 @@
                 }
               });
               map.fitBounds(bounds);
-            });
+              updateForecast(map.getCenter());
+            });            
           }
+
 
         function groupWeatherByDay(forecasts) {
             var grouped = _.groupBy(forecasts, function(forecast) {

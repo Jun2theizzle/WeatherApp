@@ -73,7 +73,7 @@
                 }
               });
               map.fitBounds(bounds);
-              updateForecast(map.getCenter());
+              updateForecast(places[0].geometry.location);
             }); 
         }
         

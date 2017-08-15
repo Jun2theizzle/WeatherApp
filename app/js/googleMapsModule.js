@@ -6,7 +6,15 @@
         .service('GoogleMapsService', GoogleMapsService);
 
     function GoogleMapsService() {
-
+        // Wrapper to abstract away any google maps calls
+        // I used the example here, https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
+        // And added only minor modifications for this use case
+        /**
+         * 
+         * @param {String}    id              - DOM Id to create the map
+         * @param {Object}    coords          - Lat Long coords for the initial placement
+         * @param {Function}  updateForecast  - Function passed in to act whenever a place is selected
+         */
         function initGoogleMaps(id, coords, updateForecast) {
             var map = new google.maps.Map(document.getElementById(id), {
               center: coords,

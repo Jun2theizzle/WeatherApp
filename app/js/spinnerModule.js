@@ -6,6 +6,12 @@
         .factory('SpinnerService', SpinnerService);
 
     function SpinnerService() {
+        // Wrapper to abstract away any dependencies on Spin.js
+        // Use the example here, http://spin.js.org/
+        /**
+         * 
+         * @param {String} id - DOM id to create the spinner on
+         */
         function createSpinner(id) {
             var opts = {
                 lines: 13,

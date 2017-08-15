@@ -8,7 +8,14 @@
     WeatherService.$inject = ['$http'];
     
     function WeatherService($http) {
-
+        /**
+         * API method to call the openweathermap 5 day forecast using zip code and country code
+         * 
+         * @param {String} zipCode 
+         * @param {String} country 
+         * 
+         * @return {Promise} A Promise that resolves into the http response
+         */
         var getFiveDayForecastByZipCode = function(zipCode, country) {
             return $http({
                 method : 'GET',
@@ -21,6 +28,14 @@
             });
         };
 
+        /**
+         * API method to call the openweathermap 5 day forecast using lat long
+         * 
+         * @param {String} lat 
+         * @param {String} long 
+         *          
+         * @return {Promise} A Promise that resolves into the http response
+         */
         var getFiveDayForecastByGeoLocation = function(lat, long) {
             return $http({
                 method : 'GET',

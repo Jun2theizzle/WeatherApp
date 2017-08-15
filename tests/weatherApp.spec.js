@@ -81,11 +81,4 @@ describe('WeatherApp', function() {
 
     });
 
-    // example
-    // it('testing http backend', function() {
-    // WeatherController.testMethod();
-    //             httpBackend.flush();
-
-    //     expect(WeatherController.tester).toEqual('herro');
-    // });
 });

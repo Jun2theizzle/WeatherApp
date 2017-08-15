@@ -89,7 +89,7 @@
             new google.maps.Marker({
                 map: map,
                 icon: icon,
-                title: 'RocketMiles',
+                title: 'Hi',
                 position: coords
             })
         }
@@ -97,6 +97,5 @@
         return {
             initGoogleMaps : initGoogleMaps
         }
-
     }
 })();

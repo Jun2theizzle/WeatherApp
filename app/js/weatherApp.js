@@ -72,14 +72,18 @@
             };
 
             GoogleMapsService.initGoogleMaps('map', googleCoords, updateForecast);
-           
           }
 
 
         function groupWeatherByDay(forecasts) {
-            var grouped = _.groupBy(forecasts, function(forecast) {
-                return moment.unix(forecast.dt).startOf('day').format('dddd, MMMM Do YYYY');                
-            });
+            var grouped = {};
+            angular.forEach(forecasts, function(forecast) {
+                var day = moment.unix(forecast.dt).startOf('day').format('dddd, MMMM Do YYYY')
+                if(!grouped[day]) {
+                    grouped[day] = [];
+                }
+                grouped[day].push(forecast)
+            })
             return grouped;
         }
     }

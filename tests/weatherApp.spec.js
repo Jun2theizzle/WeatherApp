@@ -110,8 +110,7 @@ describe('WeatherApp', function () {
 
     it('user reject location flow', function () {
         spyOn(navigator.geolocation, 'getCurrentPosition').and.callFake(function () {
-            var position = { coords: { latitude: 100, longitude: 100 } };
-            arguments[1](position);
+            arguments[1]('error');
         });
 
         spyOn(SpinnerService, 'createSpinner').and.callFake(function (id) {
